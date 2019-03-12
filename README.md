@@ -1,3 +1,78 @@
+## clone项目:
+```
+git clone https://github.com/MR-yuhuashi/graphQl-nuts.git
+```
+
+## 安装依赖包
+```
+yarn
+```
+
+## 启动前端页面(在graphql-nuts文件夹)
+```
+yarn start
+```
+
+## 启动后端服务
+1、进入server文件夹：
+```
+cd server
+```
+
+2、启动服务：
+```
+node server.js（修改后端代码后需重启：node server.j）
+```
+或者
+```
+nodemon server.js(要使用需先全局安装nodemon npm包：yarn global add nodemon)（自动检测服务端代码改动，不需重启服务）
+```
+
+启动成功会看到如下提示：
+```
+Grapgql is listening at http://:::3001
+```
+
+## 举例：curl测试服务端graphql api
+```
+curl -v -XPOST -H "Content-Type:application/graphql"  -d 'query RootQueryType { countA }' http://localhost:3001/firstGraphql
+```
+结果如下：
+```
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 3001 (#0)
+> POST /firstGraphql HTTP/1.1
+> Host: localhost:3001
+> User-Agent: curl/7.54.0
+> Accept: */*
+> Content-Type:application/graphql
+> Content-Length: 30
+> 
+* upload completely sent off: 30 out of 30 bytes
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Content-Type: text/html; charset=utf-8
+< Content-Length: 38
+< ETag: W/"26-0T/1TsjxGlc4ocW2hpIykGKdL/g"
+< Date: Tue, 12 Mar 2019 09:55:15 GMT
+< Connection: keep-alive
+< 
+{
+  "data": {
+    "countA": "0A"
+  }
+* Connection #0 to host localhost left intact
+}%   
+```
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
