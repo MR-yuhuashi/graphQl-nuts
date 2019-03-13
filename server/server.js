@@ -1,8 +1,9 @@
 let express = require('express');
+var cors = require('cors');
 // let schema = require('./schema');
 
 // let {graphql} = require('graphql');
-let bodyParer = require('body-parser');
+let bodyParser = require('body-parser');
 
 // schema
 let {
@@ -56,24 +57,34 @@ let schema = new GraphQLSchema({
     }) 
 });
 
-
-
-
-
 let app = express();
+app.use(cors());
 let PORT = 3001;
 
-app.use(bodyParer.text({ type: 'application/graphql' }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.text());
+app.use(bodyParser.text({ type: 'application/json' }));
+
+// app.use('/graphql', bodyParser.text());
+// app.use('/graphql', (req, res, next) => {
+//     if(typeof req.body === 'string')
+//         req.body = JSON.parse(req.body);
+
+//     next();
+// });
 
 app.post('/firstGraphql', (req, res) => {
+    console.log('req******************')
+    console.log(req.body)
     graphql(schema, req.body).then((result) => {
         res.send(JSON.stringify(result, null, 2));
     })
 })
 
-// app.post('/firstGraphql', (req, res) => {
-//     res.send('hello');
-// }) 
+// rest api
+app.get('/firstGraphqlDemo', (req, res) => {
+    res.send('hello');
+}) 
 let server = app.listen(PORT, () => {
     let host = server.address().address;
     let port  = server.address().port;

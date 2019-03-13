@@ -1,8 +1,42 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+// axios请求
+import axios from 'axios';
+
+import {Query} from 'react-apollo';
+import gql from "graphql-tag";
+
+// Query是个组件
+const Posts = () => (
+  <Query
+    query={gql`
+      {
+        RootQueryType {
+          count
+        }
+      }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>;
+      if (error) return <p>Error</p>;
+      return (<div>success！！！！</div>)
+    }}
+  </Query>
+);
+
 
 class App extends Component {
+  getGraphQlData () {
+    axios.get('http://localhost:3001/firstGraphqlDemo')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -17,8 +51,10 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Learn React now
           </a>
+          <button onClick={this.getGraphQlData.bind(this)}>点击</button>
+          <Posts/>
         </header>
       </div>
     );

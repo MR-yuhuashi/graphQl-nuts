@@ -64,7 +64,8 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
     "countA": "0A"
   }
 * Connection #0 to host localhost left intact
-}%   
+}%
+
 ```
 
 
